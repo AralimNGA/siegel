@@ -372,9 +372,9 @@ class Korpus:
         self.add("".join(self.r.choice(druckbar) for _ in range(4800)))
 
     def benutzereingaben(self) -> None:
-        konten = [["siegel", "aralim"], ["siegel", "jmueller", "jürg müller-zbinden", "jürg", "juerg", "jurg",
+        konten = [["siegel", "quendolin"], ["siegel", "jmueller", "jürg müller-zbinden", "jürg", "juerg", "jurg",
                   "müller", "mueller", "muller", "zbinden"], ["siegel", "anna"], ["siegel", "zwurbelmann"],
-                  ["Siegel", "Aralim Ößtürk", "İnan"], ["siegel", "", "x"], ["siegel", "levin", "levin2008"]]
+                  ["Siegel", "Max Ößmüster", "İlse"], ["siegel", "", "x"], ["siegel", "lukas", "lukas2011"]]
         for _ in range(400):
             eingaben = self.r.choice(konten)
             basis = self.r.choice([e for e in eingaben if e] or ["siegel"])
@@ -392,10 +392,10 @@ class Korpus:
                      "龍虎鳳凰麒麟亀蛇", "correcthorsebatterystaple", "Tr0ub4dor&3", "P@ssw0rt", "trowssap",
                      "|1eb3", "s0mm3r", "1qay2wsx", "ztrewq", "24.12.1990", "241290", "1990-12-24", "1.1.91",
                      "Hund1Hund2Hund3Hund4Hund5Hund6", "Mo-Di-Mi-Do-Fr-Sa-So", "Thun3600Bern3000Biel2500",
-                     "Mein Hund heisst Bello", "Ich wohne seit 2015 in Biel", "kerze-vulkan-flaute-pirat",
+                     "Mein Hund heisst Bello", "Ich wohne seit 2015 in Olten", "kerze-vulkan-flaute-pirat",
                      "Der rote Fuchs springt über den faulen Hund", "a\ufffeb", "\ufffe", "e\u0301\ufffe\u0301", "ab\u00a0cd ef", "cafe\u0301"]:
             self.add(text)
-        self.add("Aralim2008!!!", ["aralim"])
+        self.add("Quendolin2008!!!", ["quendolin"])
         self.add("Zwurbelmann1999", ["zwurbelmann"])
         self.add("JuergMueller1971!", ["siegel"])
         self.add("Siegel2026Siegel!", ["siegel"])

@@ -23,6 +23,9 @@ public class SwiftUnicodeTests
     internal const string KiratMaster = "u,F?CfDuMlYWuJASPVQ*6GUG@O\U00016D67\U00016D67";
     internal const string KiratCode = "RH199-JT9ZE-D7Z38-J5A35-BEWEQ-6DK5K-4BGQ7-JDQ66-3TVKW-CNC73-GDJX0";
     private static readonly KdfParameters Kdf256 = new(3, 256UL << 20);
+    /// <summary>Feste Uhr nach dem Erzeugen der Fixtures (18.10.2026 10:00 UTC). Der Verlauf steht neuester zuerst; mit
+    /// der echten Uhr hing die Reihenfolge davon ab, ob der Lauf vor oder nach diesem Zeitpunkt stattfand.</summary>
+    private static readonly DateTimeOffset NachDemErzeugen = new(2026, 10, 18, 12, 0, 0, TimeSpan.Zero);
 
     private static (KernTempDir Dir, VaultStore Store) Copy(string name, string sha256)
     {
@@ -38,6 +41,7 @@ public class SwiftUnicodeTests
     [Fact]
     public void Fffe_im_Eintragspasswort_Entsperren_Speichern_Import_und_Notfallcode()
     {
+        using var hooks = KT.Hook(() => TestHooks.Now = NachDemErzeugen, () => TestHooks.Now = null);
         var (dir, store) = Copy("swift_fffe_eintrag.siegel", "7e518e61edafb7f8ab6d708d609b5b2c1de4d19af722c515a38cd9ea98c762ac");
         using (dir)
         {
@@ -57,7 +61,7 @@ public class SwiftUnicodeTests
             // Speichern mit U+FFFE (vorher: ArgumentException aus ReuseTag beim Persistieren)
             e.Password = "dritt\uFFFEes";
             v.Upsert(e);
-            Assert.Equal(["abc\uFFFEdef", "neu\uFFFEwert"], Eintrag(v, "Import FFFE").History.Select(h => h.Password));
+            Assert.Equal(["neu\uFFFEwert", "abc\uFFFEdef"], Eintrag(v, "Import FFFE").History.Select(h => h.Password));
             var import = v.ImportEntries([KT.Entry("Import FFFE", "anna", "dritt\uFFFEes", "https://importfffe.example.ch"),
                 KT.Entry("Neu", "bert", "x\uFFFEy", "https://neu.example.ch")]);
             Assert.Equal((1, 1, 0), (import.Added, import.SkippedDuplicates, import.Conflicts));

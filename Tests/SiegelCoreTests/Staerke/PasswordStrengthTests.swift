@@ -10,7 +10,7 @@ import Testing
 
     static let unter60: [(String, [String])] = [
         ("Passwort1234!", []), ("Passwort2026!", []), ("Sommer2026!!!", []), ("Qwertz123456!", []),
-        ("aaaaaaaaaaaaa", []), ("Aaaaaaaaaaaa1!", []), ("Aralim2008!!!", ["aralim"]), ("YB-Meister-2026", []),
+        ("aaaaaaaaaaaaa", []), ("Aaaaaaaaaaaa1!", []), ("Quendolin2008!!!", ["quendolin"]), ("YB-Meister-2026", []),
     ]
 
     @Test(arguments: unter60.map { $0.0 })
@@ -22,9 +22,9 @@ import Testing
         #expect(MasterPasswordPolicy.check(password, userInputs: inputs).ok == false)
     }
 
-    @Test func aralimNurMitBenutzereingabeSchwach() {
-        let ohne = PasswordStrength.estimate("Aralim2008!!!").bits
-        let mit = PasswordStrength.estimate("Aralim2008!!!", userInputs: ["aralim"]).bits
+    @Test func nameNurMitBenutzereingabeSchwach() {
+        let ohne = PasswordStrength.estimate("Quendolin2008!!!").bits
+        let mit = PasswordStrength.estimate("Quendolin2008!!!", userInputs: ["quendolin"]).bits
         #expect(mit < ohne)
         #expect(mit < 30)
     }
@@ -186,9 +186,9 @@ import Testing
 
     @Test func wortfolgenMitTrennzeichen() {
         #expect(covers("Mein Hund heisst Bello", .phrase))
-        #expect(covers("Ich wohne seit 2015 in Biel", .phrase))
+        #expect(covers("Ich wohne seit 2015 in Olten", .phrase))
         #expect(PasswordStrength.estimate("Mein Hund heisst Bello").bits < 60)
-        #expect(PasswordStrength.estimate("Ich wohne seit 2015 in Biel").bits < 60)
+        #expect(PasswordStrength.estimate("Ich wohne seit 2015 in Olten").bits < 60)
         #expect(covers("Mein Hund-heisst Bello", .phrase))                 // gemischte Trennzeichen (teurer)
         #expect(PasswordStrength.estimate("Mein  Hund  heisst  Bello").bits < 60)   // doppeltes Leerzeichen
         #expect(PasswordStrength.estimate("Mein, Hund, heisst, Bello").bits < 60)

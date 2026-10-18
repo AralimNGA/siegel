@@ -178,7 +178,7 @@ bleibt sicher, solange auch nur eines der beiden Verfahren hält.
   zählen dazu; v4.7). `create`, `changeMasterPassword` und `recover` werfen sonst `passwordTooWeak` – ebenso für das
   Vernichtungs- und das Export-Passwort, die dieselbe Regel nehmen. Beim Öffnen wird nichts geprüft.
 - Muss < 60 ergeben: `Passwort1234!`, `Passwort2026!`, `Sommer2026!!!`, `Qwertz123456!`, `aaaaaaaaaaaaa`,
-  `Aaaaaaaaaaaa1!`, `Aralim2008!!!` (mit Benutzereingabe „aralim“), `YB-Meister-2026`.
+  `Aaaaaaaaaaaa1!`, `Quendolin2008!!!` (mit Benutzereingabe „quendolin“), `YB-Meister-2026`.
   Muss ≥ 60 ergeben: eine generierte 6-Wort-Passphrase, 20 Zufallszeichen aus 94.
 - **Passphrase vorschlagen** ist der Standardweg der Einrichtung: `PassphraseGenerator` zieht 6 Wörter per
   `randombytes_uniform` aus einer gebündelten deutschen Liste mit **genau 2048** Wörtern (4–8 Kleinbuchstaben

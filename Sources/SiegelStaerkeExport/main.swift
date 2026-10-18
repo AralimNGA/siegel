@@ -287,7 +287,7 @@ func kennzahlen(_ argumente: [String]) {
     }
     let eingaben = MasterPasswordPolicy.userInputs(userName: "jmueller", fullName: "Jürg Müller-Zbinden")
     zeilen.append("benutzer " + eingaben.map { Data($0.utf8).base64EncodedString() }.joined(separator: " "))
-    let eingaben2 = MasterPasswordPolicy.userInputs(userName: "Aralim", fullName: "Aralim Ößtürk İnan-Çelik")
+    let eingaben2 = MasterPasswordPolicy.userInputs(userName: "Max", fullName: "Max Ößmüster İlse-Çora")
     zeilen.append("benutzer " + eingaben2.map { Data($0.utf8).base64EncodedString() }.joined(separator: " "))
     Ausgabe.schreiben(zeilen, nach: argumente[0])
 }

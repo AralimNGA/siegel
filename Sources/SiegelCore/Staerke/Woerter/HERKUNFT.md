@@ -167,7 +167,7 @@ grobe eigene Erwartung vor dem Messen. Alle 30 werden von der Master-Passwort-Re
 | Verein+Jahr | `BVB09Dortmund` | 16.8 | veryWeak | dictionary(BVB09) dictionary(Dortmund) | < 30 | passt |
 | Name+Jahr | `Michael1985` | 13.9 | veryWeak | dictionary(Michael) year(1985) | < 22 | passt |
 | Name+Jahr | `Sabine1972!` | 25.5 | veryWeak | phrase(Sabine1972) bruteforce(!) | < 30 | passt |
-| Name+Jahr | `Levin2008` | 14.3 | veryWeak | dictionary(Levin) year(2008) | < 22 | passt |
+| Name+Jahr | `Lukas2008` | 13.9 | veryWeak | dictionary(Lukas) year(2008) | < 22 | passt |
 | Name+Jahr | `LaraMüller2010` | 26.7 | veryWeak | dictionary(Lara) dictionary(Müller) year(2010) | < 32 | passt |
 | Name+Jahr | `Thomas.Meier1979` | 15.4 | veryWeak | phrase(Thomas.Meier) year(1979) | < 36 | passt (seit Befund #17 als Wortfolge erkannt) |
 | Name+Jahr | `Jürg1965!` | 23.1 | veryWeak | phrase(Jürg1965) bruteforce(!) | < 30 | passt |
@@ -181,7 +181,7 @@ grobe eigene Erwartung vor dem Messen. Alle 30 werden von der Master-Passwort-Re
 | Satz | `Mein Hund heisst Bello` | 54.5 | fair | phrase(Mein Hund heisst Bello) | < 58 | passt; reines zxcvbn: 63.7 |
 | Satz | `DieSonneScheintHeute!` | 52.6 | fair | dictionary(Die) dictionary(Sonne) dictionary(Schein) bruteforce(tHeute!) | < 55 | knapp |
 | Satz | `ichgehejetztnachhause` | 48.1 | fair | bruteforce(ichgehe) dictionary(jetzt) dictionary(nach) dictionary(hause) | < 55 | passt |
-| Satz | `Ich wohne seit 2015 in Biel` | 52.5 | fair | phrase(Ich wohne seit 2015 in Biel) | < 58 | passt; reines zxcvbn: 78.8 |
+| Satz | `Ich wohne seit 2015 in Olten` | 53.3 | fair | phrase(Ich wohne seit 2015 in Olten) | < 58 | passt (Ort am 19.10.2026 neutral ersetzt; reines zxcvbn dafür nicht neu gemessen) |
 | Satz | `EsWarEinmalEinKönig1990` | 30.6 | weak | dictionary(EsWarEinmalEinKönig) year(1990) | < 45 | passt (Wendung in Liste; ohne: 60.3) |
 | Sonstiges | `Sommer2025!` | 15.2 | veryWeak | dictionary(Sommer2025) bruteforce(!) | < 22 | passt |
 | Sonstiges | `Grüezi123` | 16.8 | veryWeak | dictionary(Grüezi) sequence(123) | < 22 | passt |

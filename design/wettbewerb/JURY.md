@@ -30,7 +30,7 @@ Fünf Entwürfe in `design/logo-entwuerfe/`, zwei Juroren (Markenwirkung, Handwe
 
 ### Verbesserungen für den Sieger
 
-Alles in bauen.py ändern, nicht im SVG. Prototypen dazu liegen in /private/tmp/claude-501/-Users-aralim-Desktop/b9cbdf41-db59-4539-9e1d-f81d64e2d90a/scratchpad/jury-marke/ (varianten.png: a = Ist, b = rk 2.75u, c = rk 3u, d = rk 3u mit Kreismitte x ±2.5u; dock.png, menubar.png, v_c_dark256.png).
+Alles in bauen.py ändern, nicht im SVG. Prototypen dazu lagen in einem temporären Arbeitsordner `jury-marke/` (nicht im Repo; varianten.png: a = Ist, b = rk 2.75u, c = rk 3u, d = rk 3u mit Kreismitte x ±2.5u; dock.png, menubar.png, v_c_dark256.png).
 
 1) Schlüssellochkopf vergrössern, das ist die wichtigste Korrektur. Bisher rk = 2.5u (Ø 5u bei Schlitz 3u). Neu rk = 3u, also Kopf Ø 6u = 2 × Schlitz: Das ist das klassische Schlüsselloch-Verhältnis und eine neue saubere Regel statt «Kreis = Bandstärke». Zusätzlich die Kreismitten von (±3u, ±4u) auf (±2.5u, ±4u) ziehen (Variante d), damit der Ring zum Scheibenrand bei etwa 2.8u bleibt statt auf 2.5u zu fallen. Damit kippt die Lesart weg von «Leiterbahn/Schieberegler» hin zu «Schlüsselloch». Das S bleibt klar (geprüft bei 1024, 128 und 32 px).
 
@@ -76,7 +76,7 @@ Aus 02-gitter: Das Punktgitter wird als zweite Markentextur auf dem gleichen u-R
 
 Verbesserungen für 03-monogramm (alles in bauen.py umsetzen, nicht im SVG):
 
-1. Grösse im Icon: U_ICON 23 auf 25 setzen (Scheibe 525 px = 63.7 % des 824er-Körpers). Getestet: im Dock ruhiger und weniger leer, bei 16 px sogar kontrastreicher. Nicht über 26 gehen, sonst wird die schwarze Masse zu schwer. Vergleichsrender: /private/tmp/claude-501/-Users-aralim-Desktop/b9cbdf41-db59-4539-9e1d-f81d64e2d90a/scratchpad/jury-handwerk/t03-varianten.png (u23, u25, u26, dunkel, 16/32 px gezoomt).
+1. Grösse im Icon: U_ICON 23 auf 25 setzen (Scheibe 525 px = 63.7 % des 824er-Körpers). Getestet: im Dock ruhiger und weniger leer, bei 16 px sogar kontrastreicher. Nicht über 26 gehen, sonst wird die schwarze Masse zu schwer. Vergleichsrender: `jury-handwerk/t03-varianten.png` im temporären Arbeitsordner, nicht im Repo (u23, u25, u26, dunkel, 16/32 px gezoomt).
 
 2. Eigene 16- und 32-px-Fassung ins .icns (wie bei 04/05): cy und u so verschieben, dass beide Schlitze genau auf ganzen Pixelzeilen liegen (16 px: Schlitz 1 px, Bänder 2 px; 32 px: Schlitz 2 px, Bänder 4 px). Schlüssellochkreise bei 16 px mindestens 2 px weiss lassen. Prüfung per Skript: Anteil halbdeckender Pixel in den Schlitzzeilen = 0.
 

@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw
 import os
-base="/Users/aralim/Desktop/Projekte/siegel/design/logo-entwuerfe"
-out="/private/tmp/claude-501/-Users-aralim-Desktop/b9cbdf41-db59-4539-9e1d-f81d64e2d90a/scratchpad/jury-marke"
+base=os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","..","logo-entwuerfe"))
+out=os.environ.get("OUT","out")
 dirs=sorted(d for d in os.listdir(base) if os.path.isdir(os.path.join(base,d)))
 # small sizes, nearest upscale x8 for 16, x4 for 32, plus native 1x
 rows=[]

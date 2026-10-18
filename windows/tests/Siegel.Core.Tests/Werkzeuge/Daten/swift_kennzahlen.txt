@@ -22,4 +22,4 @@ graph qwertz_ch 96 4.625 48 0
 graph keypad 15 5.0666666666666664 0 0
 graph mac_keypad 16 5.25 0 0
 benutzer c2llZ2Vs am11ZWxsZXI= asO8cmcgbcO8bGxlci16YmluZGVu anVlcmcgbXVlbGxlci16YmluZGVu anVyZyBtdWxsZXItemJpbmRlbg== asO8cmc= anVlcmc= anVyZw== bcO8bGxlcg== bXVlbGxlcg== bXVsbGVy emJpbmRlbg== asO8cmdtw7xsbGVyemJpbmRlbg== anVlcmdtdWVsbGVyemJpbmRlbg== anVyZ211bGxlcnpiaW5kZW4=
-benutzer c2llZ2Vs YXJhbGlt YXJhbGltIMO2w590w7xyayBpzIduYW4tw6dlbGlr YXJhbGltIG9lc3N0dWVyayBpzIduYW4tY2VsaWs= YXJhbGltIG9zc3R1cmsgacyHbmFuLWNlbGlr w7bDn3TDvHJr b2Vzc3R1ZXJr b3NzdHVyaw== acyHbmFu w6dlbGlr Y2VsaWs= YXJhbGltw7bDn3TDvHJracyHbmFuw6dlbGlr YXJhbGltb2Vzc3R1ZXJracyHbmFuY2VsaWs= YXJhbGltb3NzdHVya2nMh25hbmNlbGlr
+benutzer c2llZ2Vs bWF4 bWF4IMO2w59tw7xzdGVyIGnMh2xzZS3Dp29yYQ== bWF4IG9lc3NtdWVzdGVyIGnMh2xzZS1jb3Jh bWF4IG9zc211c3RlciBpzIdsc2UtY29yYQ== w7bDn23DvHN0ZXI= b2Vzc211ZXN0ZXI= b3NzbXVzdGVy acyHbHNl w6dvcmE= Y29yYQ== bWF4w7bDn23DvHN0ZXJpzIdsc2XDp29yYQ== bWF4b2Vzc211ZXN0ZXJpzIdsc2Vjb3Jh bWF4b3NzbXVzdGVyacyHbHNlY29yYQ==

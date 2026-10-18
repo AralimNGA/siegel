@@ -9,7 +9,8 @@ Konstruktion (Einheit u, Scheibe = 21 u Durchmesser):
   - punktsymmetrisch; oberer Schlitz von rechts, unterer von links -> das Schwarz ist ein S
 
 Aufruf:  python3 bauen.py            (SVGs schreiben, PNGs rendern, falls der Renderer da ist)
-Renderer: Umgebungsvariable SVG_RENDER oder der Standardpfad unten.
+Renderer: Umgebungsvariable SVG_RENDER oder design/werkzeuge/bin/svg_render. Fehlt das Binary, wird es aus
+skripte/svg_render.swift übersetzt (xcrun swiftc, braucht Xcode oder die Command Line Tools), wie in design/bauen.py.
 """
 import math
 import os
@@ -18,8 +19,22 @@ import subprocess
 HIER = os.path.dirname(os.path.abspath(__file__))
 RENDER = os.environ.get(
     "SVG_RENDER",
-    "/private/tmp/claude-501/-Users-aralim-Desktop/b9cbdf41-db59-4539-9e1d-f81d64e2d90a/scratchpad/svg_render",
+    os.path.join(HIER, "..", "..", "werkzeuge", "bin", "svg_render"),
 )
+QUELLE = os.path.join(HIER, "..", "..", "..", "skripte", "svg_render.swift")
+
+
+def renderer_bereit():
+    """True, wenn RENDER existiert; übersetzt sonst skripte/svg_render.swift (nicht bei gesetztem SVG_RENDER)."""
+    if os.path.exists(RENDER):
+        return True
+    if "SVG_RENDER" in os.environ or not os.path.exists(QUELLE):
+        return False
+    os.makedirs(os.path.dirname(RENDER), exist_ok=True)
+    env = dict(os.environ)
+    if os.path.isdir("/Applications/Xcode.app"):
+        env.setdefault("DEVELOPER_DIR", "/Applications/Xcode.app/Contents/Developer")
+    return subprocess.run(["xcrun", "swiftc", "-O", "-o", RENDER, QUELLE], env=env).returncode == 0
 
 
 def zahl(v):
@@ -171,7 +186,7 @@ def rendern(svg, png, px, bg):
 if __name__ == "__main__":
     open(os.path.join(HIER, "mark.svg"), "w").write(mark_svg())
     open(os.path.join(HIER, "icon.svg"), "w").write(icon_svg())
-    if os.path.exists(RENDER):
+    if renderer_bereit():
         for px in (1024, 128, 32, 16):
             rendern("icon.svg", f"icon-{px}.png", px, "#EDEDED")
         rendern("mark.svg", "mark-512.png", 512, "white")

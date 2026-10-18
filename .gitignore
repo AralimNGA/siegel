@@ -16,3 +16,6 @@ windows/**/obj/
 windows/**/TestResults/
 # Lokaler Gerätezustand (persönlich, nie veröffentlichen)
 /LOKAL-STAND.md
+# Zwischenstände von Design-Bauläufen (Iconsets, Prüfbilder)
+design/**/.bau/
+__pycache__/

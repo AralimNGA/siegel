@@ -1,9 +1,16 @@
 #!/bin/zsh
-# Rendert den Entwurf.
+# Rendert den Entwurf. Renderer per $SVG_RENDER, sonst design/werkzeuge/bin/svg_render
+# (wird bei Bedarf aus skripte/svg_render.swift uebersetzt).
 #   ./rendern.sh            -> endgültige Dateien in diesem Ordner
 #   ./rendern.sh <var> <dir> -> Versuchsvariante aus bau.py (VARIANTEN) in <dir>
 set -e
-R=/private/tmp/claude-501/-Users-aralim-Desktop/b9cbdf41-db59-4539-9e1d-f81d64e2d90a/scratchpad/svg_render
+R=${SVG_RENDER:-${0:A:h}/../../werkzeuge/bin/svg_render}
+if [[ -z "$SVG_RENDER" && ! -x "$R" ]]; then
+  # Renderer fehlt: aus skripte/svg_render.swift übersetzen (braucht Xcode oder die Command Line Tools)
+  [[ -d /Applications/Xcode.app ]] && export DEVELOPER_DIR=${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}
+  mkdir -p "${R:h}"
+  xcrun swiftc -O -o "$R" "${0:A:h}/../../../skripte/svg_render.swift"
+fi
 cd "${0:A:h}"
 if [[ -z "$1" || "$1" == final ]]; then
   D="${2:-.}"

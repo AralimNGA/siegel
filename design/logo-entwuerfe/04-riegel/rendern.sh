@@ -1,8 +1,15 @@
 #!/bin/zsh
-# Baut die SVGs neu und rendert die Pruefbilder. Renderer per $SVG_RENDER ueberschreibbar.
+# Baut die SVGs neu und rendert die Pruefbilder. Renderer per $SVG_RENDER ueberschreibbar, sonst
+# design/werkzeuge/bin/svg_render (wird bei Bedarf aus skripte/svg_render.swift uebersetzt).
 set -e
 HIER=${0:A:h}
-R=${SVG_RENDER:-/private/tmp/claude-501/-Users-aralim-Desktop/b9cbdf41-db59-4539-9e1d-f81d64e2d90a/scratchpad/svg_render}
+R=${SVG_RENDER:-$HIER/../../werkzeuge/bin/svg_render}
+if [[ -z "$SVG_RENDER" && ! -x "$R" ]]; then
+  # Renderer fehlt: aus skripte/svg_render.swift übersetzen (braucht Xcode oder die Command Line Tools)
+  [[ -d /Applications/Xcode.app ]] && export DEVELOPER_DIR=${DEVELOPER_DIR:-/Applications/Xcode.app/Contents/Developer}
+  mkdir -p "${R:h}"
+  xcrun swiftc -O -o "$R" "$HIER/../../../skripte/svg_render.swift"
+fi
 python3 "$HIER/bauen.py" final "$HIER" >/dev/null
 "$R" "$HIER/mark.svg"       "$HIER/mark-512.png"  512  white
 "$R" "$HIER/icon.svg"       "$HIER/icon-1024.png" 1024 '#EDEDED'

@@ -33,7 +33,7 @@ public class StaerkeSchaetzungTests
     public static TheoryData<string, string[]> Unter60 => new()
     {
         { "Passwort1234!", [] }, { "Passwort2026!", [] }, { "Sommer2026!!!", [] }, { "Qwertz123456!", [] },
-        { "aaaaaaaaaaaaa", [] }, { "Aaaaaaaaaaaa1!", [] }, { "Aralim2008!!!", ["aralim"] }, { "YB-Meister-2026", [] },
+        { "aaaaaaaaaaaaa", [] }, { "Aaaaaaaaaaaa1!", [] }, { "Quendolin2008!!!", ["quendolin"] }, { "YB-Meister-2026", [] },
     };
 
     [Theory]
@@ -47,10 +47,10 @@ public class StaerkeSchaetzungTests
     }
 
     [Fact]
-    public void AralimNurMitBenutzereingabeSchwach()
+    public void NameNurMitBenutzereingabeSchwach()
     {
-        var ohne = StaerkeHilfe.Bits("Aralim2008!!!");
-        var mit = StaerkeHilfe.Bits("Aralim2008!!!", "aralim");
+        var ohne = StaerkeHilfe.Bits("Quendolin2008!!!");
+        var mit = StaerkeHilfe.Bits("Quendolin2008!!!", "quendolin");
         Assert.True(mit < ohne);
         Assert.True(mit < 30);
     }
@@ -224,9 +224,9 @@ public class StaerkeSchaetzungTests
     public void WortfolgenMitTrennzeichen()
     {
         Assert.True(StaerkeHilfe.Covers("Mein Hund heisst Bello", ZxcvbnPattern.Phrase));
-        Assert.True(StaerkeHilfe.Covers("Ich wohne seit 2015 in Biel", ZxcvbnPattern.Phrase));
+        Assert.True(StaerkeHilfe.Covers("Ich wohne seit 2015 in Olten", ZxcvbnPattern.Phrase));
         Assert.True(StaerkeHilfe.Bits("Mein Hund heisst Bello") < 60);
-        Assert.True(StaerkeHilfe.Bits("Ich wohne seit 2015 in Biel") < 60);
+        Assert.True(StaerkeHilfe.Bits("Ich wohne seit 2015 in Olten") < 60);
         Assert.True(StaerkeHilfe.Covers("Mein Hund-heisst Bello", ZxcvbnPattern.Phrase));
         Assert.True(StaerkeHilfe.Bits("Mein  Hund  heisst  Bello") < 60);
         Assert.True(StaerkeHilfe.Bits("Mein, Hund, heisst, Bello") < 60);

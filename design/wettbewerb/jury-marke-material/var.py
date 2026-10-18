@@ -1,8 +1,8 @@
-import sys, math, subprocess, importlib.util
-spec=importlib.util.spec_from_file_location("b","/Users/aralim/Desktop/Projekte/siegel/design/logo-entwuerfe/03-monogramm/bauen.py")
+import os, sys, math, subprocess, importlib.util
+spec=importlib.util.spec_from_file_location("b",os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","..","logo-entwuerfe","03-monogramm","bauen.py")))
 b=importlib.util.module_from_spec(spec); spec.loader.exec_module(b)
 src=open(spec.origin).read()
-R="/private/tmp/claude-501/-Users-aralim-Desktop/b9cbdf41-db59-4539-9e1d-f81d64e2d90a/scratchpad/svg_render"
+R=os.environ.get("SVG_RENDER","svg_render")
 def mk(rkf, name, cxo=3):
     code=src.replace("rk = 2.5 * u","rk = %r * u"%rkf).replace("cx - 3 * u, cy - 4 * u","cx - %r * u, cy - 4 * u"%cxo).replace("cx + 3 * u, cy + 4 * u","cx + %r * u, cy + 4 * u"%cxo)
     ns={"__name__":"x","__file__":spec.origin}; exec(code,ns)

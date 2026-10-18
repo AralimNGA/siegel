@@ -128,6 +128,6 @@ public class StaerkeKorpusTests
             .Select(z => z.Split(' ').Skip(1).Select(b => Encoding.UTF8.GetString(Convert.FromBase64String(b))).ToList()).ToList();
         Assert.Equal(2, erwartet.Count);
         Assert.Equal(erwartet[0], MasterPasswordPolicy.UserInputs("jmueller", "Jürg Müller-Zbinden"));
-        Assert.Equal(erwartet[1], MasterPasswordPolicy.UserInputs("Aralim", "Aralim Ößtürk İnan-Çelik"));
+        Assert.Equal(erwartet[1], MasterPasswordPolicy.UserInputs("Max", "Max Ößmüster İlse-Çora"));
     }
 }

@@ -1,6 +1,6 @@
 import os
 from PIL import Image, ImageDraw
-B='/Users/aralim/Desktop/Projekte/siegel/design/logo-entwuerfe'
+B=os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','..','logo-entwuerfe'))
 ds=['01-wachssiegel','02-gitter','03-monogramm','04-riegel','05-kristall']
 def ld(p):
     return Image.open(p).convert('RGBA') if os.path.exists(p) else None

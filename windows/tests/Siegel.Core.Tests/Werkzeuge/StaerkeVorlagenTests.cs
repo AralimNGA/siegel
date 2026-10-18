@@ -10,11 +10,11 @@ public class StaerkeTypischTests
     public static TheoryData<string, double> Faelle => new()
     {
         { "YB1898", 20 }, { "FCBasel1893!", 25 }, { "scbern2026", 22 }, { "EHCBiel2025!", 30 }, { "HCDavos1921", 30 },
-        { "BVB09Dortmund", 30 }, { "Michael1985", 22 }, { "Sabine1972!", 30 }, { "Levin2008", 22 },
+        { "BVB09Dortmund", 30 }, { "Michael1985", 22 }, { "Sabine1972!", 30 }, { "Lukas2008", 22 },
         { "LaraMüller2010", 32 }, { "Thomas.Meier1979", 36 }, { "Jürg1965!", 30 }, { "qwertz123", 15 },
         { "1qay2wsx", 15 }, { "asdfghjklöä", 18 }, { "yxcvbnm,.-", 18 }, { "147258369", 15 }, { "+\"*ç%&/()=", 18 },
         { "IchLiebeMeinenHund", 40 }, { "Mein Hund heisst Bello", 58 }, { "DieSonneScheintHeute!", 55 },
-        { "ichgehejetztnachhause", 55 }, { "Ich wohne seit 2015 in Biel", 58 }, { "EsWarEinmalEinKönig1990", 45 },
+        { "ichgehejetztnachhause", 55 }, { "Ich wohne seit 2015 in Olten", 58 }, { "EsWarEinmalEinKönig1990", 45 },
         { "Sommer2025!", 22 }, { "Grüezi123", 22 }, { "Zürich2026", 22 }, { "P@ssw0rt!", 20 },
         { "kerze-vulkan-flaute-pirat", 55 }, { "correcthorsebatterystaple", 55 },
     };

@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw
 import os
-base="/Users/aralim/Desktop/Projekte/siegel/design/logo-entwuerfe"
+base=os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","..","logo-entwuerfe"))
 dirs=sorted(d for d in os.listdir(base) if os.path.isdir(os.path.join(base,d)))
 others=["Safari","Mail","Notes","Calendar","Passwords","Terminal","Xcode","Notion"]
 S=112
