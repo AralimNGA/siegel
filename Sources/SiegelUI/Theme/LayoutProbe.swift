@@ -13,8 +13,16 @@ import SwiftUI
     }
 }
 
+// Klassischer EnvironmentKey statt @Entry: baut auch ohne SwiftUI-Makro-Plugin (Command Line Tools, ältere Xcode).
+private struct LayoutRecorderKey: EnvironmentKey {
+    static let defaultValue: LayoutRecorder? = nil
+}
+
 extension EnvironmentValues {
-    @Entry var layoutRecorder: LayoutRecorder? = nil
+    var layoutRecorder: LayoutRecorder? {
+        get { self[LayoutRecorderKey.self] }
+        set { self[LayoutRecorderKey.self] = newValue }
+    }
 }
 
 extension View {

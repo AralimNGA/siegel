@@ -176,8 +176,16 @@ public enum SecretGateOverride: Sendable, Equatable {
     case external
 }
 
+// Klassischer EnvironmentKey statt @Entry: baut auch ohne SwiftUI-Makro-Plugin (Command Line Tools, ältere Xcode).
+private struct SecretGateOverrideKey: EnvironmentKey {
+    static let defaultValue: SecretGateOverride? = nil
+}
+
 extension EnvironmentValues {
-    @Entry var secretGateOverride: SecretGateOverride? = nil
+    var secretGateOverride: SecretGateOverride? {
+        get { self[SecretGateOverrideKey.self] }
+        set { self[SecretGateOverrideKey.self] = newValue }
+    }
 }
 
 extension View {

@@ -81,61 +81,15 @@ struct ProtectionPicker: View {
     var body: some View {
         VStack(spacing: 2) {
             ForEach(EntryProtection.allCases, id: \.self) { p in
-                let gewaehlt = p == selection
-                let fehlt = !p.factors.subtracting(enrolled).isEmpty
-                let gesperrt = p < minimum
-                Button {
+                // Eigene Zeilen-Ansicht: hält den Ausdruck klein genug für ältere Swift-Compiler (Xcode 26, CI).
+                ProtectionPickerRow(
+                    protection: p,
+                    gewaehlt: p == selection,
+                    fehlt: !p.factors.subtracting(enrolled).isEmpty,
+                    gesperrt: p < minimum
+                ) {
                     selection = p
-                } label: {
-                    HStack(spacing: ProtectionPickerMetrics.spacing) {
-                        ZStack {
-                            Circle()
-                                .strokeBorder(gewaehlt ? Theme.text : Theme.secondary, lineWidth: 1)
-                                .frame(width: ProtectionPickerMetrics.circle, height: ProtectionPickerMetrics.circle)
-                            if gewaehlt {
-                                Circle().fill(Theme.text).frame(width: 7, height: 7)
-                            }
-                        }
-                        Text("\(p.rawValue)")
-                            .font(Theme.mono(12, weight: .semibold))
-                            .frame(width: ProtectionPickerMetrics.number)
-                        VStack(alignment: .leading, spacing: 1) {
-                            Text(p.title)
-                                .font(gewaehlt ? Theme.bodyMedium : Theme.body)
-                            Text(ProtectionTexts.short(p))
-                                .font(Theme.caption)
-                                .foregroundStyle(Theme.secondary)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.9)
-                        }
-                        Spacer(minLength: ProtectionPickerMetrics.spacerMin)
-                        if gesperrt {
-                            Text("vernichtbar")
-                                .font(.system(size: ProtectionPickerMetrics.hintFontSize, weight: .medium))
-                                .foregroundStyle(Theme.secondary)
-                        } else if fehlt {
-                            Text("noch einrichten")
-                                .font(.system(size: ProtectionPickerMetrics.hintFontSize, weight: .medium))
-                                .foregroundStyle(Theme.secondary)
-                        }
-                        ProtectionGlyphs(protection: p, size: ProtectionPickerMetrics.glyphSize)
-                            .foregroundStyle(Theme.text)
-                    }
-                    .padding(.horizontal, ProtectionPickerMetrics.rowPadding)
-                    .frame(height: 44)
-                    .background(
-                        RoundedRectangle(cornerRadius: 9, style: .continuous)
-                            .strokeBorder(gewaehlt ? Theme.text : Color.clear, lineWidth: 1.5)
-                    )
-                    .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
-                .disabled(gesperrt)
-                .opacity(gesperrt ? 0.45 : 1)
-                // Voller Text auch dann, wenn die Zeile ihn künftig kürzen müsste (wie bei ProtectionSegments).
-                .help(ProtectionTexts.label(p) + " – " + ProtectionTexts.short(p))
-                .accessibilityAddTraits(gewaehlt ? .isSelected : [])
-                .accessibilityLabel(ProtectionTexts.label(p) + ". " + ProtectionTexts.short(p))
             }
         }
         .padding(ProtectionPickerMetrics.outerPadding)
@@ -225,5 +179,71 @@ struct CountdownRing: View {
         }
         .frame(width: 15, height: 15)
         .accessibilityHidden(true)
+    }
+}
+
+/// Eine Zeile der Schutz-Auswahl (aus `ProtectionPicker` herausgelöst, siehe dort).
+private struct ProtectionPickerRow: View {
+    let protection: EntryProtection
+    let gewaehlt: Bool
+    let fehlt: Bool
+    let gesperrt: Bool
+    let action: () -> Void
+
+    private var p: EntryProtection { protection }
+
+    var body: some View {
+        Button {
+            action()
+        } label: {
+            HStack(spacing: ProtectionPickerMetrics.spacing) {
+                ZStack {
+                    Circle()
+                        .strokeBorder(gewaehlt ? Theme.text : Theme.secondary, lineWidth: 1)
+                        .frame(width: ProtectionPickerMetrics.circle, height: ProtectionPickerMetrics.circle)
+                    if gewaehlt {
+                        Circle().fill(Theme.text).frame(width: 7, height: 7)
+                    }
+                }
+                Text("\(p.rawValue)")
+                    .font(Theme.mono(12, weight: .semibold))
+                    .frame(width: ProtectionPickerMetrics.number)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(p.title)
+                        .font(gewaehlt ? Theme.bodyMedium : Theme.body)
+                    Text(ProtectionTexts.short(p))
+                        .font(Theme.caption)
+                        .foregroundStyle(Theme.secondary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.9)
+                }
+                Spacer(minLength: ProtectionPickerMetrics.spacerMin)
+                if gesperrt {
+                    Text("vernichtbar")
+                        .font(.system(size: ProtectionPickerMetrics.hintFontSize, weight: .medium))
+                        .foregroundStyle(Theme.secondary)
+                } else if fehlt {
+                    Text("noch einrichten")
+                        .font(.system(size: ProtectionPickerMetrics.hintFontSize, weight: .medium))
+                        .foregroundStyle(Theme.secondary)
+                }
+                ProtectionGlyphs(protection: p, size: ProtectionPickerMetrics.glyphSize)
+                    .foregroundStyle(Theme.text)
+            }
+            .padding(.horizontal, ProtectionPickerMetrics.rowPadding)
+            .frame(height: 44)
+            .background(
+                RoundedRectangle(cornerRadius: 9, style: .continuous)
+                    .strokeBorder(gewaehlt ? Theme.text : Color.clear, lineWidth: 1.5)
+            )
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .disabled(gesperrt)
+        .opacity(gesperrt ? 0.45 : 1)
+        // Voller Text auch dann, wenn die Zeile ihn künftig kürzen müsste (wie bei ProtectionSegments).
+        .help(ProtectionTexts.label(p) + " – " + ProtectionTexts.short(p))
+        .accessibilityAddTraits(gewaehlt ? .isSelected : [])
+        .accessibilityLabel(ProtectionTexts.label(p) + ". " + ProtectionTexts.short(p))
     }
 }
