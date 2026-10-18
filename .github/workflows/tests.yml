@@ -71,8 +71,10 @@ jobs:
           skripte/grep_sperren.sh --selbsttest
           skripte/grep_sperren.sh
 
-      - name: swift test
-        run: swift test
+      - name: swift test (mit Wachhund)
+        env:
+          SIEGEL_TEST_LIMIT_MIN: "25"
+        run: skripte/test_wachhund.sh
 
       - name: Release-Bau
         run: swift build -c release --product Siegel
