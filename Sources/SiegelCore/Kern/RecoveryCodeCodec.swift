@@ -152,9 +152,11 @@ enum RecoveryCodeCodec {
                 out[33] = b
             }
         }
-        var symbols = payload.withUnsafeBytes { symbols(fromBytes: $0) }
-        defer { for i in symbols.indices { symbols[i] = 0 } }
-        return formatSymbols(symbols, groupSize: groupSize)
+        // Lokaler Name ≠ Funktionsname: ältere Swift-Compiler (Xcode 26) lösen `symbols` im eigenen Initialisierer sonst
+        // als die Variable auf (CI).
+        var syms = payload.withUnsafeBytes { Self.symbols(fromBytes: $0) }
+        defer { for i in syms.indices { syms[i] = 0 } }
+        return formatSymbols(syms, groupSize: groupSize)
     }
 
     /// Kit-Kennung = Base32 von SHA3-256("Siegel v1 kit id" ‖ pkM ‖ pkX)[0..<5] → "XXXX-XXXX".
@@ -164,8 +166,8 @@ enum RecoveryCodeCodec {
         h.update(data: pkM)
         h.update(data: pkX)
         let digest = Array(h.finalize())
-        let symbols = Array(digest[0..<5]).withUnsafeBytes { symbols(fromBytes: $0) }
-        return formatSymbols(symbols, groupSize: 4)
+        let syms = Array(digest[0..<5]).withUnsafeBytes { Self.symbols(fromBytes: $0) }
+        return formatSymbols(syms, groupSize: 4)
     }
 
     // MARK: Dekodieren (exakt)
