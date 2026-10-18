@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Siegel.Werkzeuge</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="libsodium" />
+    <PackageReference Include="BouncyCastle.Cryptography" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Siegel.Core" />
+    <InternalsVisibleTo Include="Siegel.Core.Tests" />
+  </ItemGroup>
+  <!-- Wortlisten und Unicode-Tabelle der Stärke-Schätzung, erzeugt von windows/skripte/listen_exportieren.py
+       aus den Swift-Quellen (eine Quelle, SPEC-WINDOWS W7). Feste Ressourcennamen, unabhängig vom Ordner. -->
+  <ItemGroup>
+    <EmbeddedResource Include="Staerke/Listen/*.txt.gz" LogicalName="Siegel.Werkzeuge.Staerke.Listen.%(Filename)%(Extension)" />
+    <EmbeddedResource Include="Unicode/swift_unicode.txt.gz" LogicalName="Siegel.Werkzeuge.Unicode.swift_unicode.txt.gz" />
+    <EmbeddedResource Include="Unicode/swift_nfc.txt.gz" LogicalName="Siegel.Werkzeuge.Unicode.swift_nfc.txt.gz" />
+  </ItemGroup>
+</Project>

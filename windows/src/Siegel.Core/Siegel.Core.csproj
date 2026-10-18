@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Siegel.Core</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="libsodium" />
+    <PackageReference Include="BouncyCastle.Cryptography" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Siegel.Werkzeuge\Siegel.Werkzeuge.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Siegel.Core.Tests" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Siegel.Core/Siegel.Core.csproj" />
+    <Project Path="src/Siegel.Werkzeuge/Siegel.Werkzeuge.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Siegel.Core.Tests/Siegel.Core.Tests.csproj" />
+  </Folder>
+</Solution>

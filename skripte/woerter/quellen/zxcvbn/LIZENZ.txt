@@ -1,0 +1,32 @@
+Häufigkeitslisten aus zxcvbn 4.4.2 (passwords, english_wikipedia, us_tv_and_film, surnames, male_names,
+female_names). Lokal übernommen aus der Chrome-Komponente "ZxcvbnData" Version 3
+(~/Library/Application Support/Google/Chrome/ZxcvbnData/3/*.txt), kein Download.
+Die Dateien sind unverändert (SHA-256 siehe Sources/SiegelCore/Staerke/Woerter/HERKUNFT.md).
+
+Lizenz von zxcvbn (MIT):
+
+Copyright (c) 2012-2016 Dan Wheeler and Dropbox, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Herkunft der Rohdaten laut zxcvbn: Wortzählungen aus der englischen Wikipedia, Häufigkeitslisten aus
+Film-/TV-Untertiteln (Wiktionary), Namen aus der US-Volkszählung 1990 (gemeinfrei), Passwörter aus der
+10-Millionen-Sammlung von Mark Burnett (Xato, 2015, vom Autor zur freien Verwendung veröffentlicht).
+Verwendet werden nur Ränge (Reihenfolge), keine Texte.

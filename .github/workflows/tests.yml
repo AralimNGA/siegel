@@ -1,0 +1,109 @@
+# Tests von Siegel (SPEC §21). Läuft auf einem macOS-Runner von GitHub.
+#
+# Voraussetzungen (bitte bei neuen Runner-Abbildern prüfen):
+# - macOS 26 oder neuer auf Apple Silicon: Das Paket verlangt platforms .macOS(.v26), und die Tests brauchen
+#   CryptoKit MLKEM1024 zur Laufzeit. Darum das Abbild macos-26 (arm64), nicht macos-latest.
+# - Xcode 26 oder neuer (swift-tools-version 6.2, macOS-26-SDK). Entwickelt und geprüft mit Xcode 27.0 / Swift 6.4.
+#   Gewählt wird das neueste Xcode ab 26 auf dem Runner; ein bestimmtes lässt sich über die Repository-Variable
+#   SIEGEL_XCODE setzen (z. B. /Applications/Xcode_27.0.app).
+# - Arbeitsspeicher: Einige Tests leiten mit echten Argon2-Profilen ab (1–2 GiB, nacheinander). Die arm64-Runner
+#   haben 7 GB, das reicht.
+# - Kein Netz beim Bauen: libsodium liegt statisch im Repo (Vendor/Clibsodium.xcframework).
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  SIEGEL_XCODE: ${{ vars.SIEGEL_XCODE }}
+
+jobs:
+  tests:
+    name: swift test
+    runs-on: macos-26
+    timeout-minutes: 45
+    steps:
+      - name: Quelltext holen
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Xcode wählen
+        run: |
+          set -euo pipefail
+          xcode="${SIEGEL_XCODE:-}"
+          if [[ -z "$xcode" ]]; then
+            xcode="$(ls -d /Applications/Xcode_*.app 2>/dev/null \
+              | sed -nE 's#^(/Applications/Xcode_([0-9]+)(\.[0-9]+)*\.app)$#\2 \1#p' \
+              | awk '$1 >= 26 { print $2 }' | sort -V | tail -1)"
+          fi
+          if [[ -z "$xcode" || ! -d "$xcode/Contents/Developer" ]]; then
+            echo "::error::Kein Xcode ab Version 26 auf dem Runner gefunden"
+            ls -d /Applications/Xcode*.app || true
+            exit 1
+          fi
+          echo "DEVELOPER_DIR=$xcode/Contents/Developer" >> "$GITHUB_ENV"
+          echo "Gewählt: $xcode"
+
+      - name: Umgebung
+        run: |
+          sw_vers
+          uname -m
+          xcodebuild -version
+          swift --version
+
+      - name: Grep-Sperren (SPEC §5)
+        run: |
+          skripte/grep_sperren.sh --selbsttest
+          skripte/grep_sperren.sh
+
+      - name: swift test
+        run: swift test
+
+      - name: Release-Bau
+        run: swift build -c release --product Siegel
+
+  autofill:
+    name: Autofill kompilieren (ohne Signatur)
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - name: Quelltext holen
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Xcode wählen
+        run: |
+          set -euo pipefail
+          xcode="${SIEGEL_XCODE:-}"
+          if [[ -z "$xcode" ]]; then
+            xcode="$(ls -d /Applications/Xcode_*.app 2>/dev/null \
+              | sed -nE 's#^(/Applications/Xcode_([0-9]+)(\.[0-9]+)*\.app)$#\2 \1#p' \
+              | awk '$1 >= 26 { print $2 }' | sort -V | tail -1)"
+          fi
+          if [[ -z "$xcode" || ! -d "$xcode/Contents/Developer" ]]; then
+            echo "::error::Kein Xcode ab Version 26 auf dem Runner gefunden"
+            exit 1
+          fi
+          echo "DEVELOPER_DIR=$xcode/Contents/Developer" >> "$GITHUB_ENV"
+
+      - name: XcodeGen
+        run: command -v xcodegen || brew install xcodegen
+
+      - name: Kompilierprüfung (skripte/autofill_bauen.sh ohne SIEGEL_TEAM_ID)
+        run: skripte/autofill_bauen.sh

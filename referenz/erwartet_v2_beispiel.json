@@ -1,0 +1,21 @@
+{
+ "_quelle": "Von Hand aus Tests/SiegelCoreTests/Fixtures/README.md, Abschnitt (d), übernommen (nicht aus einer Programmausgabe).",
+ "formatVersion": 2,
+ "vaultID": "D4F9B640-FECB-4BAB-A72D-28DBA1D1636D",
+ "kitID": "2RMY-XAAA",
+ "generation": 7,
+ "dateigroesse": 19985,
+ "kdf": {"memLimitBytes": 268435456, "opsLimit": 3},
+ "factorMask": 7,
+ "recoveryScheme": 2,
+ "notfallkitBestaetigt": true,
+ "eintraege": [
+  {"title": "Bibliothek Bern", "username": "leserin.muster", "password": "Buecher-Regal-42!",
+   "url": "https://bibliothek.example.ch", "notes": "Ausweisnummer steht auf der Karte.", "totp": "", "verlauf": []},
+  {"title": "Velo-Club", "username": "velofahrer", "password": "Kette+Sattel-77",
+   "url": "velo.example.ch", "totp": "otpauth://totp/Velo-Club:velofahrer?secret=JBSWY3DPEHPK3PXP&issuer=Velo-Club",
+   "verlauf": ["Rad&Weg-2026"]},
+  {"title": "Notiz ohne Website", "username": "", "password": "", "url": "", "totp": "", "verlauf": [],
+   "notesEnthaelt": ["\n", "ä", "ö", "ü", "«", "»"]}
+ ]
+}

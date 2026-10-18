@@ -1,0 +1,16 @@
+<Project>
+  <!-- Gemeinsame Einstellungen (SPEC-WINDOWS W1): strenge Analyse, Warnungen als Fehler, Lock-Dateien. -->
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <Deterministic>true</Deterministic>
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,10 @@
+<Project>
+  <!-- Exakt gepinnte Paketversionen (SPEC-WINDOWS W1). Neue Pakete nur mit Eintrag in SPEC-WINDOWS W12. -->
+  <ItemGroup>
+    <PackageVersion Include="libsodium" Version="1.0.22" />
+    <PackageVersion Include="BouncyCastle.Cryptography" Version="2.7.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.4" />
+  </ItemGroup>
+</Project>

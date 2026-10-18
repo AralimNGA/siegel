@@ -1,0 +1,49 @@
+# Schweizer Orte, Kantone (mit Kürzeln), Fussball- und Eishockeyvereine, Berge, Seen, Flüsse;
+# dazu deutsche/österreichische Städte und Vereine sowie bekannte Weltstädte. Quelle: eigenes Wissen.
+# Reihenfolge = Rang: Vereinskürzel und Kantonskürzel zuerst (kurze Einträge brauchen einen kleinen Rang,
+# sonst verwirft der Generator sie wie zxcvbn als seltener als Brute-Force).
+# Format: Einträge durch Leerraum getrennt, kleingeschrieben; Zeilen mit # sind Kommentare.
+# Umschriften (ü→ue/u, ß→ss …) ergänzt der Generator selbst.
+yb fcb fcz gc scb hcd evz zsc lhc gsho scl fcl fcsg fcs fcw hcap hcfg ehcb ehck ehco scrj gcz bvb s04 hsv vfb svw sge fck fcn
+zh be lu ur sz ow nw gl zg fr so bs bl sh ar ai sg gr ag tg ti vd vs ne ge ju ch
+schweiz suisse svizzera helvetia zürich bern basel luzern genf genève geneva lausanne
+winterthur stgallen st.gallen sanktgallen lugano biel bienne thun köniz lachauxdefonds fribourg freiburg
+schaffhausen chur vernier uster sion sitten neuenburg neuchâtel lancy emmen yverdon zug
+kriens rapperswil jona dübendorf montreux dietikon frauenfeld wetzikon baar riehen meyrin wädenswil
+wettingen carouge renens aarau allschwil horgen reinach bulach bülach kreuzlingen olten nyon
+vevey kloten burgdorf langenthal solothurn baden wil gossau spiez interlaken grindelwald zermatt
+davos stmoritz st.moritz arosa engelberg andermatt adelboden gstaad saanen wengen mürren lauterbrunnen
+brienz meiringen frutigen kandersteg zweisimmen lenk visp brig martigny monthey sierre siders
+crans montana verbier saasfee leukerbad locarno ascona bellinzona mendrisio chiasso airolo disentis
+ilanz flims laax lenzerheide pontresina samedan scuol klosters landquart buchs sargans altdorf
+schwyz einsiedeln brunnen stans sarnen glarus appenzell herisau trogen liestal pratteln muttenz
+delémont delemont porrentruy moutier tavannes stimier saintimier grenchen lyss aarberg ins erlach
+murten morat nidau ipsach brügg port täuffelen studen worben busswil pieterlen lengnau
+büren zuchwil derendingen gerlafingen biberist münsingen konolfingen belp worb ostermundigen ittigen zollikofen
+bolligen muri gümligen steffisburg hilterfingen oberhofen heimberg uetendorf uri obwalden nidwalden baselstadt
+baselland ausserrhoden innerrhoden graubünden graubuenden grisons aargau thurgau tessin ticino waadt vaud
+wallis valais jura youngboys bscyoungboys ybern fcbasel fczürich fczuerich grasshoppers grasshopperclub fcstgallen
+espen fcluzern fcthun fcsion fclugano fcaarau xamax neuchâtelxamax servette servettefc fcwinterthur fcschaffhausen
+fcvaduz vaduz lausannesport fcbiel fcbielbienne fcbiel1896 fcsolothurn fcwil fcchiasso fcköniz fcbaden fcbavois
+scbern scltigers tigers langnau ehcbiel hcdavos zsclions lions evzug hclugano ambri ambripiotta
+gotteron gottéron fribourggotteron geneveservette lausannehc lakers rapperswiljona klotenflyers hcajoie ajoie hcc ehcvisp
+ehcbasel ehcthurgau hcthurgau gckusnacht gck hcsierre borussiadortmund fcbayern bayernmünchen bayernmuenchen schalke04 hamburgersv
+werderbremen eintrachtfrankfurt fcköln fckoeln vfbstuttgart herthabsc hertha unionberlin fcunion stpauli fcstpauli kaiserslautern
+hannover96 gladbach borussiamönchengladbach bayerleverkusen leverkusen vflwolfsburg wolfsburg tsghoffenheim scfreiburg mainz05 fcaugsburg vflbochum
+fcnürnberg rbleipzig dynamodresden hansarostock rapidwien austriawien sturmgraz rbsalzburg alpen mittelland emmental entlebuch
+oberland berneroberland seeland toggenburg engadin rheintal eiger mönch moench jungfrau matterhorn pilatus
+rigi säntis saentis titlis niesen stockhorn gantrisch chasseral weissenstein napf uetliberg bachtel
+tödi dom dufourspitze monterosa bernina piz palü weisshorn finsteraarhorn aletsch aletschgletscher grimsel
+furka gotthard susten simplon grossglockner zugspitze zürichsee genfersee lacleman bodensee vierwaldstättersee vierwaldstaettersee
+thunersee brienzersee bielersee murtensee neuenburgersee zugersee walensee lagomaggiore luganersee sihlsee sempachersee hallwilersee
+greifensee pfäffikersee aegerisee rhein rhone aare reuss limmat emme saane inn thur
+töss sihl birs doubs zihl berlin hamburg münchen muenchen köln koeln frankfurt
+stuttgart düsseldorf duesseldorf dortmund essen leipzig bremen dresden hannover nürnberg nuernberg duisburg
+bochum wuppertal bielefeld bonn münster muenster karlsruhe mannheim augsburg wiesbaden gelsenkirchen mönchengladbach
+braunschweig kiel chemnitz aachen halle magdeburg krefeld lübeck oberhausen erfurt mainz rostock
+kassel hagen saarbrücken potsdam ludwigshafen oldenburg osnabrück solingen heidelberg darmstadt regensburg ingolstadt
+würzburg ulm heilbronn pforzheim göttingen bottrop trier recklinghausen konstanz wien graz linz
+salzburg innsbruck klagenfurt villach wels bregenz dornbirn feldkirch liechtenstein paris london rom
+roma madrid barcelona mailand milano venedig venezia amsterdam brüssel prag praha budapest
+warschau moskau istanbul athen lissabon dublin kopenhagen stockholm oslo helsinki newyork losangeles
+chicago miami lasvegas sanfrancisco tokio tokyo peking shanghai dubai sydney

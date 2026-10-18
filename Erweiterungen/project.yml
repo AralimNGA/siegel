@@ -1,0 +1,79 @@
+# XcodeGen-Projekt für die Autofill-Variante von Siegel (SPEC §20): App + Credential-Provider-Erweiterung.
+# Nicht von Hand in Xcode ändern, sondern hier und dann `skripte/autofill_bauen.sh` (ruft xcodegen auf).
+# Das SwiftPM-Paket im Projektordner ist lokale Abhängigkeit (Produkte SiegelCore, SiegelHardware, SiegelUI).
+# Vorlage: Autofill-Probe vom 16.10.2026 (kostenloses Team: Entitlement verweigert, gemessen).
+#
+# Die normale App baut weiterhin ./build.sh (ad-hoc, sechs Entitlements). Diese Variante braucht ein bezahltes
+# Apple-Entwicklerkonto (SIEGEL_TEAM_ID) und legt den Tresor in den Gruppen-Container (Erweiterungen/LIESMICH.md).
+name: SiegelAutofill
+options:
+  bundleIdPrefix: com.aralim
+  deploymentTarget:
+    macOS: "26.0"
+  createIntermediateGroups: true
+packages:
+  Siegel:
+    path: ..
+settings:
+  base:
+    DEVELOPMENT_TEAM: ${SIEGEL_TEAM_ID}
+    CODE_SIGN_STYLE: Automatic
+    CODE_SIGN_IDENTITY: "Apple Development"
+    # Kein get-task-allow, auch nicht bei Entwickler-Signatur (SPEC §5: Debugger gesperrt)
+    CODE_SIGN_INJECT_BASE_ENTITLEMENTS: NO
+    ENABLE_HARDENED_RUNTIME: YES
+    MACOSX_DEPLOYMENT_TARGET: "26.0"
+    ARCHS: arm64
+    SWIFT_VERSION: "6.0"
+    GENERATE_INFOPLIST_FILE: NO
+    CURRENT_PROJECT_VERSION: 1
+    MARKETING_VERSION: "1.0"
+    DEAD_CODE_STRIPPING: YES
+    # Das Icon-Skript schreibt in build/ des Projekts
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+targets:
+  SiegelMac:
+    type: application
+    platform: macOS
+    sources:
+      - path: ../Sources/Siegel
+    settings:
+      base:
+        PRODUCT_NAME: Siegel
+        PRODUCT_MODULE_NAME: SiegelMac
+        PRODUCT_BUNDLE_IDENTIFIER: com.aralim.siegel
+        INFOPLIST_FILE: ../skripte/Info.plist
+        CODE_SIGN_ENTITLEMENTS: App/Siegel-Autofill.entitlements
+    dependencies:
+      - package: Siegel
+        product: SiegelUI
+      - target: SiegelAutofill
+        embed: true
+    postBuildScripts:
+      - name: Icon (skripte/icon_bauen.sh)
+        basedOnDependencyAnalysis: false
+        script: |
+          "$PROJECT_DIR/../skripte/icon_bauen.sh" "$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH" > /dev/null
+    scheme:
+      configVariants: []
+  SiegelAutofill:
+    type: app-extension
+    platform: macOS
+    sources:
+      - path: SiegelAutofill
+        excludes:
+          - "Info.plist"
+          - "*.entitlements"
+    settings:
+      base:
+        PRODUCT_NAME: SiegelAutofill
+        PRODUCT_BUNDLE_IDENTIFIER: com.aralim.siegel.autofill
+        INFOPLIST_FILE: SiegelAutofill/Info.plist
+        CODE_SIGN_ENTITLEMENTS: SiegelAutofill/SiegelAutofill.entitlements
+        SKIP_INSTALL: YES
+    dependencies:
+      - package: Siegel
+        product: SiegelCore
+      - package: Siegel
+        product: SiegelHardware
+      - sdk: AuthenticationServices.framework

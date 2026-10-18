@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>de</string>
+	<key>CFBundleDisplayName</key>
+	<string>Siegel</string>
+	<key>CFBundleExecutable</key>
+	<string>Siegel</string>
+	<key>CFBundleIconFile</key>
+	<string>Siegel</string>
+	<key>CFBundleIconName</key>
+	<string>Siegel</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.aralim.siegel</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>de</string>
+	</array>
+	<key>CFBundleName</key>
+	<string>Siegel</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>MacOSX</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>26.0</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Siegel nutzt die Kamera nur, um deine QR-Schlüsselkarte zu lesen. Bilder werden nicht gespeichert.</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>© 2026 Aralim</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+</dict>
+</plist>

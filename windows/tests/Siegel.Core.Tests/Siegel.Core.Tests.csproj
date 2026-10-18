@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <!-- Testnamen auf Deutsch sind erlaubt; Unterstriche in Methodennamen ebenso. -->
+    <NoWarn>$(NoWarn);CA1707;CA1515;CA1861</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Siegel.Core\Siegel.Core.csproj" />
+    <ProjectReference Include="..\..\src\Siegel.Werkzeuge\Siegel.Werkzeuge.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+</Project>

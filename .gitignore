@@ -1,0 +1,18 @@
+# Bauprodukte (SwiftPM, build.sh, skripte/autofill_bauen.sh, skripte/sanitizer.sh)
+/.build/
+/build/
+/.swiftpm/
+# übersetzte Hilfsprogramme, werden bei Bedarf neu gebaut (design/bauen.py, werkzeuge/systemtest.py)
+/design/werkzeuge/bin/
+# von XcodeGen erzeugt; Quelle ist Erweiterungen/project.yml
+/Erweiterungen/*.xcodeproj/
+xcuserdata/
+*.xcuserstate
+.DS_Store
+# Vendor/Clibsodium.xcframework gehört ins Repo (statische libsodium, SPEC §9) und wird nicht ignoriert.
+# .NET (windows/)
+windows/**/bin/
+windows/**/obj/
+windows/**/TestResults/
+# Lokaler Gerätezustand (persönlich, nie veröffentlichen)
+/LOKAL-STAND.md

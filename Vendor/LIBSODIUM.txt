@@ -1,0 +1,5 @@
+libsodium 1.0.22 (statisch, arm64)
+Quelle:  /opt/homebrew/opt/libsodium (Homebrew-Bottle)
+SHA-256 libsodium.a: 0c25cec8efa8a123ba91224c310fea1b9c2b34b1b6d6c10b2df19434343d6cce
+Übernommen: 2026-10-16 mit skripte/libsodium_holen.sh
+Lizenz: ISC, siehe LIBSODIUM-LICENSE.txt
