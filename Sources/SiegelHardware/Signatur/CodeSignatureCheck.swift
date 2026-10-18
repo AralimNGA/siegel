@@ -19,7 +19,9 @@ public enum CodeSignatureCheck {
     static let staticFlags = SecCSFlags(rawValue: SecCSFlags.RawValue(
         kSecCSCheckAllArchitectures | kSecCSCheckNestedCode | kSecCSStrictValidate | kSecCSRestrictSymlinks))
 
-    /// Strikte statische Prüfung eines Bündels (wie `codesign --verify --strict --deep`).
+    /// Strikte statische Prüfung eines Bündels (wie `codesign --verify --strict --deep`). Blockiert, bis Security fertig
+    /// ist, und wartet dabei intern auf weitere Dispatch-Arbeit: nicht von vielen Tasks gleichzeitig auf dem
+    /// kooperativen Pool aufrufen (siehe CodeSignatureTests). Die App ruft sie einmal beim Start auf dem Hauptthread.
     static func bundleIsValid(at url: URL) -> Bool {
         var code: SecStaticCode?
         guard SecStaticCodeCreateWithPath(url as CFURL, [], &code) == errSecSuccess, let code else { return false }

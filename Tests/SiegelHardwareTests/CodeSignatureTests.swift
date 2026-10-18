@@ -2,12 +2,26 @@ import Foundation
 import Testing
 @testable import SiegelHardware
 
-@Suite("Signatur-Selbstprüfung")
+/// `SecStaticCodeCheckValidity` wartet intern auf eine Dispatch-Gruppe. Blockieren damit alle Threads des kooperativen
+/// Pools (auf dem CI-Runner nur 3), kommt deren Arbeit nie dran: Der Lauf hing 45 Minuten. Darum prüft die Suite
+/// nacheinander und auf einem eigenen Thread (`abseits`), nie direkt auf dem Pool.
+@Suite("Signatur-Selbstprüfung", .serialized)
 struct CodeSignatureTests {
     static let codesign = URL(fileURLWithPath: "/usr/bin/codesign")
     static let executable = URL(fileURLWithPath: "/usr/bin/true")
     static var toolsPresent: Bool {
         FileManager.default.isExecutableFile(atPath: codesign.path) && FileManager.default.fileExists(atPath: executable.path)
+    }
+
+    /// Führt eine blockierende Security-Prüfung auf einem eigenen Thread aus statt auf dem kooperativen Pool.
+    static func abseits(_ body: @escaping @Sendable () -> Bool) async -> Bool {
+        await withCheckedContinuation { continuation in
+            Thread.detachNewThread { continuation.resume(returning: body()) }
+        }
+    }
+
+    static func gueltig(_ url: URL) async -> Bool {
+        await abseits { CodeSignatureCheck.bundleIsValid(at: url) }
     }
 
     /// Kleines Bündel, ad-hoc signiert wie build.sh (`--options runtime`, ohne Zeitstempel).
@@ -35,40 +49,40 @@ struct CodeSignatureTests {
         return (dir, app)
     }
 
-    @Test func ausserhalbEinesBuendelsGueltig() {
+    @Test func ausserhalbEinesBuendelsGueltig() async {
         // swift test läuft nicht aus einem .app-Bündel.
         #expect(Bundle.main.bundleURL.pathExtension != "app")
-        #expect(CodeSignatureCheck.mainBundleIsValid())
+        #expect(await Self.abseits { CodeSignatureCheck.mainBundleIsValid() })
     }
 
     @Test(.enabled(if: toolsPresent))
-    func signiertGueltigVeraendertUngueltig() throws {
+    func signiertGueltigVeraendertUngueltig() async throws {
         let (dir, app) = try signedBundle()
         defer { try? FileManager.default.removeItem(at: dir) }
-        #expect(CodeSignatureCheck.bundleIsValid(at: app))
+        #expect(await Self.gueltig(app))
         let resource = app.appendingPathComponent("Contents/Resources/text.txt")
         try Data("Ressource!".utf8).write(to: resource)
-        #expect(!CodeSignatureCheck.bundleIsValid(at: app))
+        #expect(await Self.gueltig(app) == false)
     }
 
     @Test(.enabled(if: toolsPresent))
-    func zusaetzlicheOderFehlendeDatei() throws {
+    func zusaetzlicheOderFehlendeDatei() async throws {
         do {
             let (dir, app) = try signedBundle()
             defer { try? FileManager.default.removeItem(at: dir) }
             try Data("fremd".utf8).write(to: app.appendingPathComponent("Contents/Resources/fremd.txt"))
-            #expect(!CodeSignatureCheck.bundleIsValid(at: app))
+            #expect(await Self.gueltig(app) == false)
         }
         do {
             let (dir, app) = try signedBundle()
             defer { try? FileManager.default.removeItem(at: dir) }
             try FileManager.default.removeItem(at: app.appendingPathComponent("Contents/Resources/text.txt"))
-            #expect(!CodeSignatureCheck.bundleIsValid(at: app))
+            #expect(await Self.gueltig(app) == false)
         }
     }
 
     @Test(.enabled(if: toolsPresent))
-    func veraendertesProgramm() throws {
+    func veraendertesProgramm() async throws {
         let (dir, app) = try signedBundle()
         defer { try? FileManager.default.removeItem(at: dir) }
         let binary = app.appendingPathComponent("Contents/MacOS/Probe")
@@ -76,20 +90,20 @@ struct CodeSignatureTests {
         let middle = bytes.count / 2
         bytes[middle] ^= 0xFF
         try bytes.write(to: binary)
-        #expect(!CodeSignatureCheck.bundleIsValid(at: app))
+        #expect(await Self.gueltig(app) == false)
     }
 
-    @Test func unsigniertOderFehlend() throws {
+    @Test func unsigniertOderFehlend() async throws {
         let dir = tempDirectory("siegel-sig")
         defer { try? FileManager.default.removeItem(at: dir) }
-        #expect(!CodeSignatureCheck.bundleIsValid(at: dir.appendingPathComponent("Fehlt.app")))
+        #expect(await Self.gueltig(dir.appendingPathComponent("Fehlt.app")) == false)
         let fake = dir.appendingPathComponent("Leer.app/Contents/MacOS", isDirectory: true)
         try FileManager.default.createDirectory(at: fake, withIntermediateDirectories: true)
         try Data("#!/bin/sh\n".utf8).write(to: fake.appendingPathComponent("Leer"))
-        #expect(!CodeSignatureCheck.bundleIsValid(at: dir.appendingPathComponent("Leer.app")))
+        #expect(await Self.gueltig(dir.appendingPathComponent("Leer.app")) == false)
     }
 
-    @Test func laufenderProzessGueltig() {
-        #expect(CodeSignatureCheck.runningCodeIsValid())
+    @Test func laufenderProzessGueltig() async {
+        #expect(await Self.abseits { CodeSignatureCheck.runningCodeIsValid() })
     }
 }
